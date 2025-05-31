@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Machine Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>State Machine Dashboard</h1>
+            <div class="connection-status">
+                <div id="connectionIndicator" class="status-indicator status-disconnected"></div>
+                <span id="connectionText">Disconnected</span>
+            </div>
+        </div>
+
+        <div class="config-panel">
+            <h2>Configuration</h2>
+            <div class="input-group">
+                <label for="statusEndpoint">Status Endpoint:</label>
+                <input type="text" id="statusEndpoint" placeholder="https://api.example.com/status" value="https://jsonplaceholder.typicode.com/posts/1">
+            </div>
+            <div class="input-group">
+                <label for="statesEndpoint">States Endpoint:</label>
+                <input type="text" id="statesEndpoint" placeholder="https://api.example.com/states" value="https://jsonplaceholder.typicode.com/posts">
+            </div>
+            <div class="input-group">
+                <label for="eventsEndpoint">Events Endpoint:</label>
+                <input type="text" id="eventsEndpoint" placeholder="https://api.example.com/events" value="https://jsonplaceholder.typicode.com/comments">
+            </div>
+            <div class="input-group">
+                <label for="eventsActionEndpoint">Events Action Endpoint:</label>
+                <input type="text" id="eventsActionEndpoint" placeholder="https://api.example.com/trigger-event" value="https://jsonplaceholder.typicode.com/posts">
+            </div>
+            <div class="input-group">
+                <label for="refreshInterval">Refresh Interval (seconds):</label>
+                <input type="number" id="refreshInterval" value="5" min="1" max="300">
+            </div>
+            <div class="event-trigger-section">
+                <div class="input-group">
+                    <label for="eventSelector">Select Event to Trigger:</label>
+                    <select id="eventSelector" disabled>
+                        <option value="">Select an event...</option>
+                    </select>
+                </div>
+                <button class="btn" id="triggerEventBtn" onclick="triggerSelectedEvent()" disabled>Trigger Event</button>
+            </div>
+            <div class="control-buttons">
+                <button class="btn" onclick="startMonitoring()">Start Monitoring</button>
+                <button class="btn" onclick="stopMonitoring()">Stop</button>
+                <button class="btn" onclick="refreshData()">Refresh Now</button>
+            </div>
+        </div>
+
+        <div class="current-state-panel">
+            <h2>Current State</h2>
+            <div id="currentState" class="current-state">NOT CONNECTED</div>
+            <div class="state-metadata">
+                <div class="metadata-item">
+                    <div class="metadata-label">Last Updated</div>
+                    <div id="lastUpdated" class="metadata-value">Never</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Duration</div>
+                    <div id="stateDuration" class="metadata-value">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="states-grid">
+            <div class="states-container">
+                <div class="available-states">
+                    <h3>Available States</h3>
+                    <div id="statesList" class="states-list">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            Configure endpoints and start monitoring
+                        </div>
+                    </div>
+                </div>
+                <div class="available-events">
+                    <h3>Available Events</h3>
+                    <div id="eventsList" class="events-list">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            Configure endpoints and start monitoring
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="last-updated" id="dataLastUpdated">
+                Configure your web service endpoints above to begin monitoring
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
